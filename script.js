@@ -13,7 +13,7 @@ window.onscroll = () => {
         if (top >= offset && top < offset + height) {
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                document.querySelector('header nav a[href*=' + id + ']').classList.add('active')
+                document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
             });
         }
     });
@@ -23,3 +23,24 @@ menuIcon.onclick = () => {
     menuIcon.classList.toggle('bx-x');
     navbar.classList.toggle('active');
 };
+
+// Smooth scrolling for internal links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+            targetElement.scrollIntoView({
+                behavior: 'smooth'
+            });
+        } else {
+            console.error(`Target element with id "${targetId}" not found.`);
+        }
+    });
+});
+
+
+
